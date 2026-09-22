@@ -1,860 +1,270 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para Chicha ❤️</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg1:#0f0a13;
-      --bg2:#1b1022;
-      --card:rgba(255,255,255,0.08);
-      --border:rgba(255,255,255,0.15);
-      --text:#f8eefb;
-      --muted:#d7bfdc;
-      --pink:#ff4f9a;
-      --pink2:#ff7ab5;
-      --gold:#ffd166;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255,79,154,.15), transparent 30%),
-        radial-gradient(circle at top right, rgba(255,209,102,.10), transparent 25%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
-      min-height:100vh;
-    }
-
-    /* Fondo animado */
-    .hearts{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .heart{
-      position:absolute;
-      bottom:-30px;
-      color:rgba(255,255,255,.18);
-      animation:floatUp linear forwards;
-      user-select:none;
-    }
-
-    @keyframes floatUp{
-      0%{
-        transform:translateY(0) scale(1) rotate(0deg);
-        opacity:0;
-      }
-      10%{ opacity:1; }
-      100%{
-        transform:translateY(-120vh) scale(1.4) rotate(25deg);
-        opacity:0;
-      }
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter: blur(12px);
-      background:rgba(10,10,15,.35);
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-
-    nav{
-      width:min(1150px,92%);
-      margin:auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 0;
-    }
-
-    .logo{
-      font-family:'Great Vibes',cursive;
-      font-size:2rem;
-      color:#fff;
-      letter-spacing:1px;
-    }
-
-    .menu{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-
-    .menu a{
-      color:var(--text);
-      text-decoration:none;
-      font-size:.95rem;
-      opacity:.9;
-      transition:.25s;
-    }
-
-    .menu a:hover{
-      color:var(--pink2);
-      transform:translateY(-1px);
-    }
-
-    .hero{
-      position:relative;
-      z-index:1;
-      width:min(1150px,92%);
-      margin:auto;
-      min-height:100vh;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      align-items:center;
-      gap:40px;
-      padding:40px 0 70px;
-    }
-
-    .hero-text h1{
-      font-family:'Great Vibes',cursive;
-      font-size:clamp(3.4rem,8vw,6.6rem);
-      line-height:1;
-      margin-bottom:10px;
-      color:#fff;
-      text-shadow:0 0 20px rgba(255,255,255,.12);
-    }
-
-    .hero-text .subtitle{
-      font-size:1.1rem;
-      color:var(--muted);
-      margin-bottom:18px;
-    }
-
-    .hero-text .intro{
-      font-size:1rem;
-      line-height:1.85;
-      color:#f4dff4;
-      margin-bottom:28px;
-      max-width:620px;
-    }
-
-    .buttons{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      border:none;
-      padding:14px 22px;
-      border-radius:999px;
-      font-weight:600;
-      cursor:pointer;
-      transition:.25s ease;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:var(--shadow);
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--pink),var(--pink2));
-      color:#fff;
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-2px) scale(1.02);
-    }
-
-    .btn-secondary{
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    .btn-secondary:hover{
-      background:rgba(255,255,255,.14);
-      transform:translateY(-2px);
-    }
-
-    .hero-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:28px;
-      padding:18px;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-
-    .photo-main{
-      width:100%;
-      aspect-ratio:4/5;
-      object-fit:cover;
-      border-radius:22px;
-      display:block;
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    .card-mini{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-
-    .mini{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:14px 10px;
-      text-align:center;
-    }
-
-    .mini h3{
-      font-size:1.4rem;
-      color:#fff;
-    }
-
-    .mini p{
-      font-size:.82rem;
-      color:var(--muted);
-      margin-top:3px;
-    }
-
-    section{
-      position:relative;
-      z-index:1;
-      width:min(1100px,92%);
-      margin:0 auto 90px;
-    }
-
-    .section-title{
-      font-family:'Great Vibes',cursive;
-      font-size:3rem;
-      text-align:center;
-      margin-bottom:14px;
-    }
-
-    .section-subtitle{
-      text-align:center;
-      color:var(--muted);
-      margin-bottom:35px;
-    }
-
-    .letter{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:26px;
-      padding:30px;
-      backdrop-filter: blur(14px);
-      box-shadow:var(--shadow);
-      line-height:2;
-      font-size:1rem;
-      color:#f9edf7;
-    }
-
-    .letter strong{
-      color:#fff;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:20px;
-    }
-
-    .reason-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:24px;
-      box-shadow:var(--shadow);
-      transition:.25s ease;
-    }
-
-    .reason-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(255,122,181,.45);
-    }
-
-    .reason-card span{
-      font-size:1.7rem;
-      display:block;
-      margin-bottom:10px;
-    }
-
-    .reason-card h3{
-      margin-bottom:10px;
-      font-size:1.1rem;
-    }
-
-    .reason-card p{
-      color:var(--muted);
-      line-height:1.8;
-      font-size:.95rem;
-    }
-
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .gallery img{
-      width:100%;
-      height:260px;
-      object-fit:cover;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow:var(--shadow);
-      transition:.25s;
-    }
-
-    .gallery img:hover{
-      transform:scale(1.03);
-    }
-
-    .timeline{
-      display:grid;
-      gap:18px;
-    }
-
-    .moment{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:var(--shadow);
-    }
-
-    .moment h3{
-      color:#fff;
-      margin-bottom:8px;
-    }
-
-    .moment p{
-      color:var(--muted);
-      line-height:1.8;
-    }
-
-    .counter-box{
-      background:linear-gradient(135deg, rgba(255,79,154,.18), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.15);
-      border-radius:26px;
-      padding:28px;
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-
-    .counter{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:22px;
-    }
-
-    .counter-item{
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:20px;
-      padding:18px 10px;
-    }
-
-    .counter-item h3{
-      font-size:2rem;
-      color:#fff;
-    }
-
-    .counter-item p{
-      color:var(--muted);
-      margin-top:4px;
-      font-size:.9rem;
-    }
-
-    .surprise-wrap{
-      text-align:center;
-    }
-
-    .footer{
-      text-align:center;
-      padding:30px 15px 50px;
-      color:var(--muted);
-      position:relative;
-      z-index:1;
-    }
-
-    /* modal */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      z-index:100;
-    }
-
-    .modal.active{
-      display:flex;
-    }
-
-    .modal-content{
-      width:min(680px,95%);
-      background:linear-gradient(135deg,#201423,#2a1831);
-      border:1px solid rgba(255,255,255,.15);
-      border-radius:28px;
-      padding:32px 24px;
-      text-align:center;
-      box-shadow:0 25px 60px rgba(0,0,0,.45);
-      animation:showModal .3s ease;
-    }
-
-    @keyframes showModal{
-      from{ transform:scale(.92); opacity:0; }
-      to{ transform:scale(1); opacity:1; }
-    }
-
-    .modal-content h2{
-      font-family:'Great Vibes',cursive;
-      font-size:3rem;
-      margin-bottom:12px;
-    }
-
-    .modal-content p{
-      line-height:2;
-      color:#f9e8f7;
-      margin-bottom:20px;
-    }
-
-    .music-note{
-      margin-top:14px;
-      font-size:.9rem;
-      color:var(--muted);
-    }
-
-    @media(max-width:950px){
-      .hero{
-        grid-template-columns:1fr;
-        padding-top:30px;
-      }
-
-      .cards,
-      .gallery{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:600px){
-      .menu{
-        gap:10px;
-      }
-
-      .hero-text h1{
-        font-size:3.5rem;
-      }
-
-      .cards,
-      .gallery,
-      .counter{
-        grid-template-columns:1fr;
-      }
-
-      .section-title{
-        font-size:2.45rem;
-      }
-
-      .card-mini{
-        grid-template-columns:1fr;
-      }
-    }
-  
-/* ✨ Mejora visual: conserva la estructura y funcionalidad original */
-body::before{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:radial-gradient(circle at 50% 20%,rgba(255,122,181,.08),transparent 28%),
-             radial-gradient(circle at 50% 85%,rgba(255,209,102,.06),transparent 30%);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Brenda 🌻</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:Georgia,"Times New Roman",serif;
+  background:#02050a;
+  color:#fff;
 }
-header{box-shadow:0 8px 30px rgba(0,0,0,.18)}
-.menu a{padding:8px 12px;border-radius:999px}
-.menu a:hover{background:rgba(255,255,255,.08)}
-.hero-text h1{animation:softGlow 3s ease-in-out infinite alternate}
-@keyframes softGlow{
-  from{text-shadow:0 0 12px rgba(255,122,181,.10)}
-  to{text-shadow:0 0 30px rgba(255,122,181,.35),0 0 55px rgba(255,209,102,.10)}
+.scene{
+  position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 75%,rgba(38,78,37,.55),transparent 35%),
+    radial-gradient(circle at 50% 20%,#13233b 0%,#050b14 55%,#010205 100%);
 }
-.hero-card,.letter,.reason-card,.moment,.counter-box{
-  box-shadow:0 20px 55px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06);
+.stars,.petals,.sparkles{position:absolute;inset:0;pointer-events:none}
+.star{
+  position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;
+  box-shadow:0 0 9px #fff;animation:twinkle 1.8s ease-in-out infinite alternate;
 }
-.letter{position:relative;overflow:hidden}
-.letter::before{
-  content:"❤";position:absolute;right:24px;top:14px;font-size:4rem;opacity:.06;transform:rotate(12deg)
-}
-.reason-card,.moment,.mini,.counter-item{
-  transition:transform .25s ease,background .25s ease,border-color .25s ease;
-}
-.reason-card:hover,.moment:hover{
-  transform:translateY(-5px);background:rgba(255,255,255,.10);
-}
-.btn-primary{
-  background:linear-gradient(135deg,#ff4f9a,#ff7ab5,#ffd166);
-  background-size:200% 200%;animation:buttonShine 5s ease infinite;
-}
-@keyframes buttonShine{
-  0%,100%{background-position:0% 50%}50%{background-position:100% 50%}
-}
-.footer{border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.08)}
+@keyframes twinkle{to{opacity:.15;transform:scale(.45)}}
 
-  </style>
+.moon{
+  position:absolute;right:9%;top:7%;width:85px;height:85px;border-radius:50%;
+  background:#fff5b2;box-shadow:0 0 25px #fff5b2,0 0 90px rgba(255,236,130,.3);
+}
+.moon:after{
+  content:"";position:absolute;right:18px;top:7px;width:85px;height:85px;
+  border-radius:50%;background:#09121f;
+}
+
+.intro{
+  position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:25px;background:rgba(1,4,8,.55);backdrop-filter:blur(5px);
+  transition:1s;
+}
+.intro.hide{opacity:0;pointer-events:none;transform:scale(1.08)}
+.intro .heart{font-size:72px;filter:drop-shadow(0 0 20px #ffd21c);animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.16)}}
+.intro h1{font-size:clamp(30px,8vw,64px);color:#ffe34d;text-shadow:0 0 25px #ffc400;margin:10px 0}
+.intro p{font-family:Arial,sans-serif;font-size:17px;opacity:.9}
+.openBtn,.letterBtn,.closeBtn{
+  border:0;border-radius:999px;cursor:pointer;font-weight:bold;
+  transition:.25s;font-family:Arial,sans-serif;
+}
+.openBtn{
+  margin-top:28px;padding:16px 30px;font-size:17px;color:#3b2800;
+  background:linear-gradient(135deg,#fff06a,#ffae00);
+  box-shadow:0 0 22px rgba(255,204,0,.7),0 0 60px rgba(255,180,0,.25);
+}
+.openBtn:hover{transform:scale(1.08)}
+
+.message{
+  position:absolute;z-index:8;top:6%;left:50%;transform:translate(-50%,-20px);
+  width:min(92%,720px);text-align:center;opacity:0;transition:1.8s 2.3s;
+}
+.message.show{opacity:1;transform:translate(-50%,0)}
+.message h2{font-size:clamp(32px,8vw,65px);color:#ffe34d;text-shadow:0 0 25px #ffb700}
+.message p{margin-top:10px;font-family:Arial,sans-serif;font-size:clamp(15px,3.5vw,20px);line-height:1.55;text-shadow:0 2px 10px #000}
+
+.garden{position:absolute;left:0;right:0;bottom:-15px;height:58%}
+.flower{position:absolute;bottom:-30px;width:110px;height:260px;animation:grow 2.2s cubic-bezier(.2,.8,.2,1) forwards;transform-origin:bottom}
+@keyframes grow{from{transform:translateY(230px) scale(.2);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.stem{position:absolute;bottom:0;left:53px;width:7px;height:205px;border-radius:9px;background:linear-gradient(90deg,#123d20,#4aa44d,#123d20)}
+.leaf{position:absolute;width:58px;height:26px;background:linear-gradient(135deg,#5ab957,#175827);border-radius:100% 0 100% 0}
+.leaf.l{left:4px;bottom:75px;transform:rotate(-24deg)}
+.leaf.r{right:0;bottom:112px;transform:rotate(205deg)}
+.head{position:absolute;top:0;left:15px;width:82px;height:82px}
+.petal{
+  position:absolute;left:25px;top:12px;width:33px;height:53px;border-radius:50%;
+  background:linear-gradient(135deg,#fff36b,#ffae00);transform-origin:16px 29px;
+  box-shadow:0 0 12px rgba(255,207,0,.55)
+}
+.petal:nth-child(1){transform:rotate(0deg) translateY(-25px)}
+.petal:nth-child(2){transform:rotate(45deg) translateY(-25px)}
+.petal:nth-child(3){transform:rotate(90deg) translateY(-25px)}
+.petal:nth-child(4){transform:rotate(135deg) translateY(-25px)}
+.petal:nth-child(5){transform:rotate(180deg) translateY(-25px)}
+.petal:nth-child(6){transform:rotate(225deg) translateY(-25px)}
+.petal:nth-child(7){transform:rotate(270deg) translateY(-25px)}
+.petal:nth-child(8){transform:rotate(315deg) translateY(-25px)}
+.center{position:absolute;left:27px;top:27px;width:29px;height:29px;border-radius:50%;z-index:3;background:radial-gradient(circle,#ffd84a 0 30%,#684100 72%);box-shadow:0 0 14px #ffcf00}
+
+.photoCard{
+  position:absolute;z-index:9;left:50%;bottom:5%;transform:translateX(-50%) rotate(-2deg) scale(.7);
+  width:min(210px,42vw);padding:8px 8px 28px;background:#fff;
+  box-shadow:0 15px 45px rgba(0,0,0,.55),0 0 35px rgba(255,205,0,.2);
+  opacity:0;transition:1.2s 3.2s;
+}
+.photoCard.show{opacity:1;transform:translateX(-50%) rotate(-2deg) scale(1)}
+.photoCard img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover}
+.photoCard .caption{color:#392800;text-align:center;font-size:16px;margin-top:8px}
+@media(max-width:600px){.photoCard{bottom:3%;width:145px}.garden{height:50%}.flower{transform:scale(.75)}}
+
+.letterBtn{
+  position:absolute;z-index:15;left:50%;bottom:18px;transform:translateX(-50%);
+  padding:12px 22px;background:rgba(0,0,0,.4);border:1px solid #ffd22b;color:#ffe36b;
+  backdrop-filter:blur(7px)
+}
+.letterBtn:hover{background:rgba(255,205,0,.14);transform:translateX(-50%) scale(1.05)}
+
+.modal{
+  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  padding:22px;background:rgba(0,0,0,.78);backdrop-filter:blur(9px);
+  opacity:0;pointer-events:none;transition:.5s
+}
+.modal.open{opacity:1;pointer-events:auto}
+.letter{
+  width:min(92%,560px);max-height:88vh;overflow:auto;padding:34px 28px;
+  color:#4a3500;text-align:center;border-radius:25px;
+  background:linear-gradient(145deg,#fffce7,#ffe47b);
+  box-shadow:0 0 80px rgba(255,204,0,.45);transform:scale(.7);transition:.5s
+}
+.modal.open .letter{transform:scale(1)}
+.letter h3{font-size:clamp(27px,7vw,40px);margin-bottom:18px}
+.letter p{font-family:Arial,sans-serif;font-size:17px;line-height:1.7}
+.closeBtn{margin-top:23px;padding:11px 24px;background:#493300;color:white}
+
+.fall{
+  position:absolute;top:-40px;width:14px;height:20px;border-radius:100% 0 100% 0;
+  background:#ffd21e;box-shadow:0 0 9px rgba(255,210,30,.6);
+  animation:fall linear forwards
+}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.spark{
+  position:absolute;width:6px;height:6px;border-radius:50%;background:#fff2a1;
+  box-shadow:0 0 15px #ffd21c;animation:rise 2.8s forwards
+}
+@keyframes rise{from{transform:translateY(0) scale(.2);opacity:0}25%{opacity:1}to{transform:translateY(-230px) scale(1);opacity:0}}
+
+.signature{margin-top:20px;color:#725100;font-size:15px}
+</style>
 </head>
 <body>
+<div class="scene">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
 
-  <div class="hearts" id="hearts"></div>
-
-  <header>
-    <nav>
-      <div class="logo">Chicha ❤️</div>
-      <div class="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#carta">Carta</a>
-        <a href="#razones">Razones</a>
-        <a href="#fotos">Fotos</a>
-        <a href="#sorpresa">Sorpresa</a>
-      </div>
-    </nav>
-  </header>
-
-  <section class="hero" id="inicio">
-    <div class="hero-text">
-      <h1>Para Chicha</h1>
-      <p class="subtitle">Una página hecha con todo mi corazón ✨</p>
-      <p class="intro">
-        Quería hacerte algo más especial que un simple mensaje.
-        Algo que pudieras abrir cuando me extrañes, cuando estés triste,
-        o cuando simplemente quieras recordar lo muchísimo que significas para mí.
-        Porque tú, mi chicha, no eres una persona cualquiera en mi vida…
-        <strong>eres alguien que hizo que mi mundo se viera más bonito.</strong>
-      </p>
-
-      <div class="buttons">
-        <a href="#carta" class="btn btn-primary">Leer carta 💌</a>
-      </div>
-
-      <p class="music-note">TE AMO COMO UNA VACA VIEJITA</p>
-    </div>
-
-    <div class="hero-card">
-      <!-- CAMBIA ESTA IMAGEN -->
-      <img class="photo-main" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop" alt="Foto especial para Elena">
-
-      <div class="card-mini">
-        <div class="mini">
-          <h3 id="daysTogether">0</h3>
-          <p>Días contigo</p>
-        </div>
-        <div class="mini">
-          <h3>∞</h3>
-          <p>Besos pendientes</p>
-        </div>
-        <div class="mini">
-          <h3>1000%</h3>
-          <p>Especial para mí</p>
-        </div>
-      </div>
-    </div>
+  <section class="intro" id="intro">
+    <div class="heart">💛</div>
+    <h1>Mi preciosa novia Brendita</h1>
+    <p>Tengo algo preparado especialmente para ti espero te guste...</p>
+    <button class="openBtn" onclick="openGift()">Abrir mi sorpresa 🌻</button>
   </section>
 
-  <section id="carta">
-    <h2 class="section-title">Mi carta para ti</h2>
-    <p class="section-subtitle">Lo que a veces no alcanzo a decirte en una sola llamada o mensaje</p>
-
-    <div class="letter">
-      Mi chicha, desde que llegaste a mi vida empecé a sentir cosas muy bonitas que no se explican fácil.
-      Hay personas que pasan, hay personas que se quedan, y luego estás tú…
-      <strong>que te volviste una parte preciosa de mis días.</strong>
-      <br><br>
-      Me gusta tu forma de ser, tu esencia, tu presencia, tu manera de existir.
-      Me gusta cómo haces que momentos normales se sientan especiales.
-      Me gusta pensar en ti, hablar contigo, imaginar planes contigo y sonreír por cosas que sólo tú provocas.
-      <br><br>
-      Quiero que esta página te recuerde algo:
-      <strong>nunca eres poca cosa para mí.</strong>
-      Eres importante, eres valiosa, eres hermosa por dentro y por fuera, y tienes un lugar muy especial en mi corazón.
-      <br><br>
-      Cuando dudes, entra aquí. Cuando me extrañes, entra aquí. Cuando quieras sentirte querida, entra aquí.
-      Porque esto no está hecho por compromiso, ni por costumbre.
-      <strong>Está hecho porque realmente te amo, Chicha.</strong>
-
-      <div style="margin-top:28px;padding:24px 22px;border:1px solid rgba(255,122,181,.22);border-radius:22px;background:linear-gradient(135deg,rgba(255,79,154,.10),rgba(255,209,102,.05));text-align:center;">
-        <div style="font-family:'Great Vibes',cursive;font-size:2.2rem;color:#ffb1d0;margin-bottom:8px;">Una pequeña dedicatoria para ti ❤️</div>
-        <p style="margin:0;line-height:2;color:#f9e8f7;">
-          Chicha, <strong>sé que te amo seguir conociendo,</strong> quiero descubrir cada parte de ti,
-          tus sueños, tus miedos, tus pequeñas manías, tus días buenos y también aquellos en los que
-          necesites que alguien se quede contigo la verdad no quiero apresurar lo que sentimos quiero vivirlo,
-          conocerlo y cuidarlo poquito a poquito.
-          <br><br>
-          Y también quiero ser sincero contigo: <strong>espero poder ser lo suficiente esta vez.</strong>
-          No porque quiera ser perfecto, sino porque quiero dar lo mejor de mí, aprender de lo que haga
-          mal y demostrarte con hechos lo mucho que me importas.
-          <br><br>
-          No sé exactamente qué nos tenga preparado la vida, pero sí sé que me gustaría intentarlo contigo.
-          Y si algún día las cosas no salen como quisiera, al menos quiero poder mirar atrás y saber que
-          <strong>lo intenté de corazón</strong>, que fui sincero con lo que sentía y que nunca dejé de
-          valorar la oportunidad de haberte conocido.
-          <br><br>
-          Porque entre tantas personas, coincidimos tú y yo… y para mí, eso ya es algo bonito que quiero
-          seguir descubriendo. <strong>Te amo, Chicha y quiero seguir conociéndote. ❤️</strong>
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="razones">
-    <h2 class="section-title">Razones por las que te amo</h2>
-    <p class="section-subtitle">Aunque la verdad, ni toda una página alcanzaría</p>
-
-    <div class="cards">
-      <div class="reason-card">
-        <span>✨</span>
-        <h3>Tu forma de iluminar</h3>
-        <p>
-          Tienes una manera muy tuya de hacer que todo se sienta más bonito.
-          Hasta en mis días simples, pensarte me cambia el ánimo.
-        </p>
-      </div>
-
-      <div class="reason-card">
-        <span>💖</span>
-        <h3>Lo que me haces sentir</h3>
-        <p>
-          Contigo hay emoción, ternura, paz y muchas ganas de seguir creando recuerdos.
-          Eres de esas personas que se sienten de verdad.
-        </p>
-      </div>
-
-      <div class="reason-card">
-        <span>🌷</span>
-        <h3>Tu esencia</h3>
-        <p>
-          No se trata solo de lo bonita que eres, sino de todo lo que eres como persona.
-          Tu esencia vale muchísimo.
-        </p>
-      </div>
-
-      <div class="reason-card">
-        <span>🥹</span>
-        <h3>Tu sonrisa</h3>
-        <p>
-          Porque sí, tu sonrisa tiene algo peligroso:
-          me desarma, me calma y me enamora.
-        </p>
-      </div>
-
-      <div class="reason-card">
-        <span>🤍</span>
-        <h3>Lo especial que eres</h3>
-        <p>
-          No eres reemplazable, no eres una más, no eres cualquier historia.
-          Eres alguien que de verdad deja huella.
-        </p>
-      </div>
-
-      <div class="reason-card">
-        <span>🚀</span>
-        <h3>Lo que imagino contigo</h3>
-        <p>
-          Me gusta pensar en todo lo bonito que todavía nos falta vivir,
-          porque contigo hasta el futuro suena lindo.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="fotos">
-    <h2 class="section-title">Nuestros recuerdos</h2>
-    <p class="section-subtitle">Aun no tenemos fotitos pero pronto tendremos otey?</p>
-
-    <div class="gallery">
-      <img src="" alt="Recuerdo 1">
-      <img src="" alt="Recuerdo 2">
-      <img src="" alt="Recuerdo 3">
-      <img src="" alt="Recuerdo 4">
-    </div>
-  </section>
-
-  <section id="momentos">
-    <h2 class="section-title">Momentos que quiero contigo</h2>
-    <p class="section-subtitle">Pequeñas cosas que se vuelven grandes si son a tu lado</p>
-
-    <div class="timeline">
-      <div class="moment">
-        <h3>📍 Una salida simple, pero contigo</h3>
-        <p>
-          Ir a cualquier lugar, aunque no sea lujoso ni perfecto. Si voy contigo, ya vale totalmente la pena.
-        </p>
-      </div>
-
-      <div class="moment">
-        <h3>🌙 Hablar hasta tarde</h3>
-        <p>
-          De cosas profundas, tontas, bonitas o sin sentido. Esos momentos contigo se quedan conmigo.
-        </p>
-      </div>
-
-      <div class="moment">
-        <h3>📸 Crear recuerdos</h3>
-        <p>
-          Fotos, videos, mensajes, bromas, detalles… todo eso que después se vuelve tesoro.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contador">
-    <div class="counter-box">
-      <h2 class="section-title" style="margin-bottom:0;">Tiempo especial</h2>
-      <p class="section-subtitle" style="margin-bottom:0;">
-    
-      </p>
-
-      <div class="counter">
-        <div class="counter-item">
-          <h3 id="cDays">0</h3>
-          <p>Días</p>
-        </div>
-        <div class="counter-item">
-          <h3 id="cHours">0</h3>
-          <p>Horas</p>
-        </div>
-        <div class="counter-item">
-          <h3 id="cMinutes">0</h3>
-          <p>Minutos</p>
-        </div>
-        <div class="counter-item">
-          <h3 id="cSeconds">0</h3>
-          <p>Segundos</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="sorpresa">
-    <div class="surprise-wrap">
-      <h2 class="section-title">Hay algo más para ti</h2>
-      <p class="section-subtitle">Porque una sola carta no era suficiente</p>
-      <button class="btn btn-primary" id="openModal">Abrir sorpresa 🎁</button>
-    </div>
-  </section>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2>Mi sorpresa para ti, Chicha ❤️</h2>
-      <p>
-        Quiero que nunca olvides esto:
-        <br><br>
-        <strong>te amo muchísimo.</strong>
-        <br><br>
-        Y aunque a veces no encuentre las palabras perfectas,
-        siempre voy a querer demostrarte con detalles que eres alguien muy especial para mí.
-        Gracias por existir, por ser tú,
-        y por hacer que mi corazón tenga un motivo bonito para sonreír.
-      </p>
-      <button class="btn btn-secondary" id="closeModal">Cerrar</button>
-    </div>
+  <div class="message" id="message">
+    <h2>Para ti, Brenda 💛</h2>
+    <p>
+      Si pudiera regalarte todas las flores del mundo, lo haría...
+      pero por ahora quise hacerte un pequeño jardín solo para ti, recuerda este detalle a mi estilo 🌻
+    </p>
   </div>
 
-<audio id="bgMusic" loop autoplay>
-  <source src="Kilometros-SinBandera.mp3" type="audio/mpeg">
-</audio>
+  <div class="garden" id="garden"></div>
 
-<footer class="footer">
-  Hecho por Missael Pérez con mucho cariño para Chicha 💘
-</footer>
+  <div class="photoCard" id="photoCard">
+    <img src="brenda.jpg" alt="Brenda">
+    <div class="caption">Mi chiquita piciosa 💛</div>
+  </div>
+
+  <button class="letterBtn" onclick="openLetter()">💌 Hay algo más para ti</button>
+</div>
+
+<div class="petals" id="petals"></div>
+<div class="sparkles" id="sparkles"></div>
+
+<div class="modal" id="modal" onclick="outsideClose(event)">
+  <div class="letter">
+    <h3>Para mi Brenda 💛</h3>
+    <p>
+      No quería simplemente regalarte unas flores ya que todo el mundo las regala fisicamente
+      queria hacer algo que fuera solamente tuyo , que nadamas tu pidieras vivir o recordar conmigo
+      <br><br>
+      Porque te zmo muchisimo y me encanta seguir
+      conociéndote, compartir momentos contigo y crear
+      recuerdos que algún día podamos mirar juntos y seguir riendonos de la gente 
+      <br><br>
+      Ojalá estas flores virtuales te sean bonitas y te recuerden que, entre tantas
+      personas y tantos lugares, yo sigo eligiendo
+      compartir mi tiempo contigo nos hacen falta muchas cosas que vivir,
+      gran camino que recorrer pero se que lo lograremos
+      <br><br>
+      Gracias por cada risa, cada momento y cada
+      recuerdo que hemos creado.
+      <br><br>
+      <b>Te amo mucho, Brenda. 💛🌻</b>
+    </p>
+    <div class="signature">Hecho especialmente para ti ✨</div>
+    <button class="closeBtn" onclick="closeLetter()">Cerrar 💛</button>
+  </div>
+</div>
 
 <script>
-  const heartsContainer = document.getElementById("hearts");
+const $ = id => document.getElementById(id);
 
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = Math.random() > 0.5 ? "❤" : "✨";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 18 + 14) + "px";
-    heart.style.animationDuration = (Math.random() * 5 + 6) + "s";
-    heart.style.opacity = Math.random() * 0.5 + 0.1;
-    heartsContainer.appendChild(heart);
+for(let i=0;i<95;i++){
+  const s=document.createElement("span");
+  s.className="star";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*72+"%";
+  s.style.animationDelay=(Math.random()*2)+"s";
+  s.style.opacity=.25+Math.random()*.75;
+  $("stars").appendChild(s);
+}
 
-    setTimeout(() => {
-      heart.remove();
-    }, 12000);
-  }
+function flower(x,delay,scale){
+  const f=document.createElement("div");
+  f.className="flower";
+  f.style.left=x+"%";
+  f.style.animationDelay=delay+"s";
+  f.style.transform=`scale(${scale})`;
+  f.innerHTML=`
+    <div class="stem"></div><div class="leaf l"></div><div class="leaf r"></div>
+    <div class="head">
+      <i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i>
+      <i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i>
+      <b class="center"></b>
+    </div>`;
+  $("garden").appendChild(f);
+}
 
-  setInterval(createHeart, 350);
+function openGift(){
+  $("intro").classList.add("hide");
+  const flowers=[
+    [3,.15,.7],[12,.5,.82],[21,.9,.65],[30,.25,.9],[40,.7,1],
+    [50,.15,.75],[59,.85,.9],[69,.4,.7],[79,.75,.95],[89,.2,.72],
+    [15,1.25,.6],[34,1.35,.65],[55,1.2,.62],[74,1.35,.65]
+  ];
+  flowers.forEach(v=>flower(...v));
+  setTimeout(()=>$("message").classList.add("show"),80);
+  setTimeout(()=>$("photoCard").classList.add("show"),100);
+  petals();
+  sparks();
+}
 
-  // Música automática
-  const music = document.getElementById("bgMusic");
+function petals(){
+  setInterval(()=>{
+    const p=document.createElement("span");
+    p.className="fall";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(4+Math.random()*5)+"s";
+    p.style.transform=`rotate(${Math.random()*360}deg)`;
+    $("petals").appendChild(p);
+    setTimeout(()=>p.remove(),9500);
+  },320);
+}
 
-  music.volume = 1;
+function sparks(){
+  setInterval(()=>{
+    const s=document.createElement("span");
+    s.className="spark";
+    s.style.left=(10+Math.random()*80)+"%";
+    s.style.top=(55+Math.random()*35)+"%";
+    $("sparkles").appendChild(s);
+    setTimeout(()=>s.remove(),3000);
+  },240);
+}
 
-  // Se reproduce al primer click/toque
-  document.addEventListener("click", () => {
-    music.play().catch(() => {});
-  }, { once: true });
-
-  // Modal sorpresa
-  const modal = document.getElementById("modal");
-
-  document.getElementById("openModal").addEventListener("click", () => {
-    modal.classList.add("active");
-  });
-
-  document.getElementById("closeModal").addEventListener("click", () => {
-    modal.classList.remove("active");
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("active");
-    }
-  });
-
-  // FECHA ESPECIAL
-  const specialDate = new Date("2025-12-11T00:00:00");
-
-  function updateCounter() {
-    const now = new Date();
-    const diff = now - specialDate;
-
-    if (diff < 0) return;
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("cDays").textContent = days;
-    document.getElementById("cHours").textContent = hours;
-    document.getElementById("cMinutes").textContent = minutes;
-    document.getElementById("cSeconds").textContent = seconds;
-    document.getElementById("daysTogether").textContent = days;
-  }
-
-  setInterval(updateCounter, 1000);
-  updateCounter();
+function openLetter(){ $("modal").classList.add("open"); }
+function closeLetter(){ $("modal").classList.remove("open"); }
+function outsideClose(e){ if(e.target.id==="modal") closeLetter(); }
 </script>
 </body>
 </html>
